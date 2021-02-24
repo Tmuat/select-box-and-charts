@@ -1,17 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
 
-<title>Select</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+
+    <title>Select</title>
 </head>
+
 <body>
-<h1>Hiya</h1>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
+    <h1>Hiya</h1>
+    <div class="w-50 text-center">
+        <button id="button" class="btn btn-primary">Delete Me</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Select</th>
+                    <th scope="col">Item Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td><input type="checkbox" value="{{ item.id }}" name="table-selects"></td>
+                    <td>{{ item.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form id="table-action-form" method="POST">
+            {% csrf_token %}
+            <input type="text" name="id-selected" id="id-selected">
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#button").click(function () {
+                var selected = [];
+                $.each($("input[type='checkbox']:checked"), function () {
+                    selected.push($(this).val());
+                    $('#id-selected').val(selected);
+                });
+                $( "#table-action-form" ).submit();
+            });
+        });
+    </script>
 </body>
+
 </html>
