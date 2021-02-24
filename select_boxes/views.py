@@ -8,6 +8,6 @@ def select(request):
         'data': data
     }
 
-    template = 'charts.html'
+    template = 'select.html'
 
     return render(request, template, context)
