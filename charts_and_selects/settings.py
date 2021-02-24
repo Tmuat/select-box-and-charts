@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'charts',
+    'select_boxes'
 ]
 
 MIDDLEWARE = [
